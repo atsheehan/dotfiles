@@ -1,4 +1,4 @@
 #!/bin/sh
-pwd=`pwd`
+dotfiles_dir="$(cd "$(dirname "$0")" && pwd)"
 
-ln -sf $pwd/gemrc $HOME/.gemrc
+ln -sf $dotfiles_dir/gemrc $HOME/.gemrc
