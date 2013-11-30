@@ -1,0 +1,38 @@
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+(global-set-key (kbd "C-c C-,") 'comment-region)
+(global-set-key (kbd "<f5>") 'replace-string)
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq-default x-select-enable-clipboard t)
+(setq-default column-number-mode t)
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq ruby-deep-indent-paren nil)
+
+(setq package-list
+      '(yaml-mode
+        haml-mode
+        scss-mode
+        markdown-mode
+        color-theme))
+
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" .
+               "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(dolist (package package-list)
+  (when (not (package-installed-p package))
+    (package-install package)))
+
+(require 'color-theme)
+(color-theme-billw)
