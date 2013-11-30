@@ -1,0 +1,26 @@
+[user]
+  name = Adam Sheehan
+  email = a.t.sheehan@gmail.com
+
+[alias]
+  s = status
+  co = checkout
+  cob = checkout -b 
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+[color]
+  branch = auto
+  diff = auto
+  iteractive = auto
+  status = auto
+
+[github]
+  user = atsheehan
+
+[core]
+  excludesfile = /home/asheehan/.gitignore
+  pager = less -r
+
+[push]
+  default = matching
