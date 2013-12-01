@@ -5,9 +5,11 @@
 [alias]
   s = status
   co = checkout
-  cob = checkout -b 
+  cob = checkout -b
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  check = diff --staged
+  add-check = !git add -A && git check
 
 [color]
   branch = auto
