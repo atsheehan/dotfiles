@@ -18,6 +18,7 @@
       '(yaml-mode
         haml-mode
         scss-mode
+        scala-mode
         markdown-mode
         color-theme))
 
