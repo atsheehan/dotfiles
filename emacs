@@ -37,3 +37,10 @@
 
 (require 'color-theme)
 (color-theme-billw)
+
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.rake\\'" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.glsl\\'" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("emacs" . emacs-lisp-mode))
