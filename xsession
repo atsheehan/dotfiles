@@ -1,5 +1,4 @@
 gnome-settings-daemon &
-cinnamon-settings-daemon &
 nm-applet &
 dropbox start &
 cinnamon-sound-applet &
