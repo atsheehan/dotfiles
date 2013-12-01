@@ -12,7 +12,8 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-(setq ruby-deep-indent-paren nil)
+(setq-default ruby-deep-indent-paren nil)
+(setq-default js-indent-level 2)
 
 (setq package-list
       '(yaml-mode
