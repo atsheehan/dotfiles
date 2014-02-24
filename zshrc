@@ -29,3 +29,6 @@ export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 alias cb='xclip -selection clipboard'
+
+# Swap the control and caps lock key.
+xmodmap ~/.Xmodmap
