@@ -1,6 +1,8 @@
-# Ensures GNU screen is always running in the terminal.
-if [[ ! $TERM =~ screen ]]; then
-  exec screen
+# Ensures GNU screen is always running in the terminal (if it is installed).
+if type screen > /dev/null; then
+    if [[ ! $TERM =~ screen ]]; then
+        exec screen
+    fi
 fi
 
 # Path to your oh-my-zsh configuration.
