@@ -6,6 +6,8 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
+-- Volume control widget
+require("volume")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -177,6 +179,7 @@ for s = 1, screen.count() do
             mylauncher,
             mytaglist[s],
             mypromptbox[s],
+            volume_widget,
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
@@ -213,6 +216,11 @@ globalkeys = awful.util.table.join(
             if client.focus then client.focus:raise() end
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
+
+    awful.key({ modkey, }, "=", function ()
+       awful.util.spawn("amixer set Master 9%+", false) end),
+   awful.key({ modkey }, "-", function ()
+       awful.util.spawn("amixer set Master 9%-", false) end),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
