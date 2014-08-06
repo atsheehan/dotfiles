@@ -51,3 +51,5 @@
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
 
 (setq require-final-newline t)
+(if (> (x-display-pixel-height) 1050)
+    (set-face-attribute 'default nil :height 180))
