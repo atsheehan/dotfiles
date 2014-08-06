@@ -20,8 +20,7 @@
         haml-mode
         scss-mode
         scala-mode
-        markdown-mode
-        color-theme))
+        markdown-mode))
 
 (require 'package)
 (add-to-list 'package-archives
@@ -35,9 +34,6 @@
 (dolist (package package-list)
   (when (not (package-installed-p package))
     (package-install package)))
-
-(require 'color-theme)
-(color-theme-billw)
 
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Cheffile" . ruby-mode))
@@ -53,3 +49,5 @@
 (setq require-final-newline t)
 (if (> (x-display-pixel-height) 1050)
     (set-face-attribute 'default nil :height 180))
+
+(load-theme 'wombat t)
