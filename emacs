@@ -49,6 +49,7 @@
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
 
 (setq require-final-newline t)
+(setq backup-directory-alist `(("." . "~/.saves")))
 (setq scss-compile-at-save nil)
 
 (if (> (x-display-pixel-height) 1050)
