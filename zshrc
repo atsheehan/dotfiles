@@ -32,3 +32,5 @@ alias cb='xclip -selection clipboard'
 
 # Swap the control and caps lock key.
 setxkbmap -option ctrl:nocaps
+
+eval "$(rbenv init -)"
