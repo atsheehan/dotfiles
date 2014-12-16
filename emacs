@@ -29,7 +29,8 @@
         scss-mode
         scala-mode
         markdown-mode
-        helm-ls-git))
+        helm-ls-git
+        magit))
 
 (dolist (package package-list)
   (when (not (package-installed-p package))
