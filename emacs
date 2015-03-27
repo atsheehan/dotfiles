@@ -49,6 +49,7 @@
 (global-set-key (kbd "C-c C-,") 'comment-region)
 (global-set-key (kbd "C-c f") 'fill-region)
 (global-set-key (kbd "C-c p") 'fill-paragraph)
+(global-set-key (kbd "C-c g") 'magit-status)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f5>") 'replace-string)
 
