@@ -28,19 +28,27 @@
       '(yaml-mode
         haml-mode
         scss-mode
-        scala-mode
+        sbt-mode
+        scala-mode2
         markdown-mode
         helm-ls-git
-        magit))
+        magit
+        ensime
+        git-gutter))
 
 (dolist (package package-list)
   (when (not (package-installed-p package))
     (package-install package)))
 
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
 (require 'helm-ls-git)
 (global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 (global-set-key (kbd "C-c C-,") 'comment-region)
+(global-set-key (kbd "C-c f") 'fill-region)
+(global-set-key (kbd "C-c p") 'fill-paragraph)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f5>") 'replace-string)
 
@@ -64,4 +72,8 @@
 (if (> (x-display-pixel-height) 1050)
     (set-face-attribute 'default nil :height 180))
 
+(set-face-attribute 'default nil :height 220)
+
 (load-theme 'wombat t)
+
+(global-git-gutter-mode +1)
