@@ -10,6 +10,7 @@
 (setq-default tab-width 4)
 (setq-default ruby-deep-indent-paren nil)
 (setq-default js-indent-level 2)
+(setq-default css-indent-offset 2)
 
 (require 'package)
 (add-to-list 'package-archives
