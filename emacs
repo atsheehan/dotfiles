@@ -7,10 +7,12 @@
 (setq-default x-select-enable-clipboard t)
 (setq-default column-number-mode t)
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default ruby-deep-indent-paren nil)
+(setq-default tab-width 2)
 (setq-default js-indent-level 2)
+(setq-default jsx-indent-level 2)
 (setq-default css-indent-offset 2)
+(setq-default web-mode-attr-indent-offset 2)
+(setq-default ruby-deep-indent-paren nil)
 
 (require 'package)
 (add-to-list 'package-archives
@@ -20,6 +22,9 @@
              '("melpa" .
                "http://melpa.org/packages/") t)
 (package-initialize)
+
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
 
 (when (not package-archive-contents)
   (package-refresh-contents))
@@ -34,6 +39,7 @@
         helm-ls-git
         magit
         ensime
+        elixir-mode
         git-gutter))
 
 (dolist (package package-list)
@@ -65,16 +71,43 @@
 (add-to-list 'auto-mode-alist '("emacs" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
+(add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
+(add-to-list 'auto-mode-alist '("\\.html.eex\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.avdl\\'" . java-mode))
 
 (setq require-final-newline t)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq scss-compile-at-save nil)
 
-(if (> (x-display-pixel-height) 1050)
-    (set-face-attribute 'default nil :height 180))
-
-(set-face-attribute 'default nil :height 220)
+(set-face-attribute 'default nil :height 160)
 
 (load-theme 'wombat t)
 
 (global-git-gutter-mode +1)
+
+;; use web-mode for .jsx files
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+(setq web-mode-content-types-alist
+      '(("jsx" . ".*\\.js[x]?\\'")))
+
+(defun shallow-indent-setup ()
+  (c-set-offset 'arglist-intro '+))
+(add-hook 'java-mode-hook 'shallow-indent-setup)
+
+(defun my-web-mode-hook ()
+  "Hooks for Web mode. Adjust indents"
+  ;;; http://web-mode.org/
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+(setq magit-status-buffer-switch-function 'switch-to-buffer)
+(setq org-log-done t)
+(setq ruby-use-smie nil)
+
+(setq ring-bell-function 'ignore)
