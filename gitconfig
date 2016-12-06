@@ -21,7 +21,7 @@
   user = atsheehan
 
 [core]
-  excludesfile = /home/asheehan/.gitignore
+  excludesfile = ~/.gitignore
   pager = less -r
 
 [push]
