@@ -6,3 +6,5 @@
 *.graffle
 
 /TODO.org
+
+.byebug_history
