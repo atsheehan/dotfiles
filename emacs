@@ -4,8 +4,16 @@
                "https://melpa.org/packages/") t)
 (package-initialize)
 
-(when (not package-archive-contents)
-  (package-refresh-contents))
+(if (not package-archive-contents)
+    (package-refresh-contents))
+
+(if (not (package-installed-p 'use-package))
+    (package-install 'use-package))
+
+(setq use-package-verbose t)
+(setq use-package-always-ensure t)
+
+(require 'use-package)
 
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
