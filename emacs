@@ -1,6 +1,7 @@
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;; Remove unused toolbars to gain more screen real estate
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
