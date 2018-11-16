@@ -1,3 +1,12 @@
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" .
+               "https://melpa.org/packages/") t)
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
@@ -15,18 +24,6 @@
 (setq-default web-mode-attr-indent-offset 2)
 (setq-default ruby-deep-indent-paren nil)
 
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" .
-               "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" .
-               "http://melpa.org/packages/") t)
-(package-initialize)
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
 (setq package-list
       '(yaml-mode
         scss-mode
@@ -40,11 +37,11 @@
         enh-ruby-mode
         elixir-mode))
 
-(global-git-gutter-mode +1)
-
 (dolist (package package-list)
   (when (not (package-installed-p package))
     (package-install package)))
+
+(global-git-gutter-mode +1)
 
 (require 'helm-ls-git)
 (global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
