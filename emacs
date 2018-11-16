@@ -29,7 +29,6 @@
 
 (setq package-list
       '(yaml-mode
-        haml-mode
         scss-mode
         markdown-mode
         dockerfile-mode
@@ -62,21 +61,19 @@
 (add-to-list 'auto-mode-alist '("Rakefile" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.jbuilder\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.glsl\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("emacs" . emacs-lisp-mode))
-(add-to-list 'auto-mode-alist '("\\.libsonnet\\'" . jsonnet-mode))
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
 (add-to-list 'auto-mode-alist '("\\.html.eex\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.avdl\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
 
 (setq require-final-newline t)
 (setq backup-directory-alist `(("." . "~/.saves")))
@@ -86,9 +83,6 @@
 (set-face-attribute 'default nil :height 160)
 
 (load-theme 'wombat t)
-
-;; use web-mode for .jsx files
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
 (setq web-mode-content-types-alist
       '(("jsx" . ".*\\.js[x]?\\'")))
