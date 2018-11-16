@@ -103,3 +103,14 @@
 
 (global-git-commit-mode)
 (server-start)
+
+(when (eq system-type 'darwin)
+  ;; default Latin font (e.g. Consolas)
+  (set-face-attribute 'default nil :family "Monaco")
+
+  ;; default font size (point * 10)
+  ;;
+  ;; WARNING!  Depending on the default font,
+  ;; if the size is not supported very well, the frame will be clipped
+  ;; so that the beginning of the buffer may not be visible correctly.
+  (set-face-attribute 'default nil :height 165))
