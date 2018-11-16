@@ -31,13 +31,11 @@
       '(yaml-mode
         haml-mode
         scss-mode
-        sbt-mode
         markdown-mode
         dockerfile-mode
         helm-ls-git
         web-mode
         magit
-        ensime
         json-mode
         git-gutter
         enh-ruby-mode
@@ -48,9 +46,6 @@
 (dolist (package package-list)
   (when (not (package-installed-p package))
     (package-install package)))
-
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
 (require 'helm-ls-git)
 (global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
@@ -75,7 +70,6 @@
 (add-to-list 'auto-mode-alist '("emacs" . emacs-lisp-mode))
 (add-to-list 'auto-mode-alist '("\\.libsonnet\\'" . jsonnet-mode))
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode))
-(add-to-list 'auto-mode-alist '("\\.sbt\\'" . scala-mode))
 (add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
 (add-to-list 'auto-mode-alist '("\\.html.eex\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
