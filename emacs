@@ -15,14 +15,29 @@
 
 (require 'use-package)
 
+(use-package yaml-mode)
+(use-package scss-mode)
+(use-package markdown-mode)
+(use-package dockerfile-mode)
+(use-package helm-ls-git)
+(use-package web-mode)
+(use-package magit)
+(use-package json-mode)
+(use-package git-gutter)
+(use-package enh-ruby-mode)
+(use-package elixir-mode)
+
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 
+;; Ensure correct amount of whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq require-final-newline t)
 
-(setq-default x-select-enable-clipboard t)
+(load-theme 'wombat t)
+
 (setq-default column-number-mode t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
@@ -32,26 +47,8 @@
 (setq-default web-mode-attr-indent-offset 2)
 (setq-default ruby-deep-indent-paren nil)
 
-(setq package-list
-      '(yaml-mode
-        scss-mode
-        markdown-mode
-        dockerfile-mode
-        helm-ls-git
-        web-mode
-        magit
-        json-mode
-        git-gutter
-        enh-ruby-mode
-        elixir-mode))
-
-(dolist (package package-list)
-  (when (not (package-installed-p package))
-    (package-install package)))
-
 (global-git-gutter-mode +1)
 
-(require 'helm-ls-git)
 (global-set-key (kbd "C-<f6>") 'helm-ls-git-ls)
 (global-set-key (kbd "C-x C-d") 'helm-browse-project)
 (global-set-key (kbd "C-c C-,") 'comment-region)
@@ -79,15 +76,9 @@
 (add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
-
-(setq require-final-newline t)
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 (setq scss-compile-at-save nil)
-
-(set-face-attribute 'default nil :height 160)
-
-(load-theme 'wombat t)
 
 (setq web-mode-content-types-alist
       '(("jsx" . ".*\\.js[x]?\\'")))
@@ -109,20 +100,6 @@
 (setq ruby-use-smie nil)
 
 (setq ring-bell-function 'ignore)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (lua-mode jsonnet-mode groovy-mode toml-mode enh-ruby-mode rust-mode logstash-conf dockerfile-mode sass-mode handlebars-mode web-mode git-gutter json-mode yaml-mode scss-mode markdown-mode magit helm-ls-git haml-mode ensime elixir-mode))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
