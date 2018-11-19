@@ -102,8 +102,6 @@
 (setq create-lockfiles nil)
 (setq ruby-insert-encoding-magic-comment nil)
 
-(setq org-todo-keywords '((sequence "TODO" "WAITING" "|" "DONE")))
-
 (global-git-commit-mode)
 (server-start)
 
