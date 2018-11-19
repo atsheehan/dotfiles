@@ -26,6 +26,13 @@
   :bind ("C-x C-d" . 'helm-browse-project))
 
 (use-package web-mode
+  :mode
+  ("\\.js\\'" . web-mode)
+  ("\\.jsx\\'" . web-mode)
+  ("\\.hbs\\'" . web-mode)
+  ("\\.html\\'" . web-mode)
+  ("\\.html.eex\\'" . web-mode)
+  ("\\.html.erb\\'" . web-mode)
   :init
   (setq web-mode-attr-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
@@ -33,9 +40,17 @@
   (setq web-mode-code-indent-offset 2))
 
 (use-package magit)
-(use-package json-mode)
+(use-package json-mode
+  :mode "\\.avsc\\'")
 (use-package git-gutter)
 (use-package enh-ruby-mode
+  :mode
+  ("Gemfile" . enh-ruby-mode)
+  ("Cheffile" . enh-ruby-mode)
+  ("Rakefile" . enh-ruby-mode)
+  ("\\.rb\\'" . enh-ruby-mode)
+  ("\\.gemspec\\'" . enh-ruby-mode)
+  ("\\.rake\\'" . enh-ruby-mode)
   :init
   (setq enh-ruby-deep-indent-paren nil)
   (setq enh-ruby-add-encoding-comment-on-save nil))
@@ -43,7 +58,6 @@
 (use-package elixir-mode)
 (use-package toml-mode)
 (use-package rust-mode)
-(use-package web-mode)
 
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
@@ -68,21 +82,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f5>") 'replace-string)
 
-(add-to-list 'auto-mode-alist '("Gemfile" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("Cheffile" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("Rakefile" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rb\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.gemspec\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.rake\\'" . enh-ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.glsl\\'" . c-mode))
 (add-to-list 'auto-mode-alist '("emacs" . emacs-lisp-mode))
-(add-to-list 'auto-mode-alist '("\\.ex\\'" . elixir-mode))
-(add-to-list 'auto-mode-alist '("\\.html.eex\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.hbs\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.avsc\\'" . json-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
