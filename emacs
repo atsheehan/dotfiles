@@ -58,6 +58,7 @@
 (use-package elixir-mode)
 (use-package toml-mode)
 (use-package rust-mode)
+(use-package glsl-mode)
 
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
