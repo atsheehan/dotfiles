@@ -42,7 +42,13 @@
 (use-package magit)
 (use-package json-mode
   :mode "\\.avsc\\'")
-(use-package git-gutter)
+
+;; Display which lines have been modified since last commit. The
+;; fringe package works with line numbers.
+(use-package git-gutter-fringe+
+  :config
+  (global-git-gutter+-mode 1))
+
 (use-package enh-ruby-mode
   :mode
   ("Gemfile" . enh-ruby-mode)
@@ -81,8 +87,6 @@
 (setq column-number-mode t)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-
-(global-git-gutter-mode 1)
 
 (global-set-key (kbd "C-c C-,") 'comment-region)
 (global-set-key (kbd "C-c f") 'fill-region)
