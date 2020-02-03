@@ -65,6 +65,13 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 
+;; Global line numbers mode
+(global-linum-mode 1)
+
+;; Hide splash screen and banner
+(setq inhibit-startup-message t
+      inhibit-startup-echo-area-message t)
+
 ;; Ensure correct amount of whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq require-final-newline t)
