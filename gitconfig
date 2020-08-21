@@ -8,6 +8,7 @@
   cob = checkout -b
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
   lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  lob = log --graph --decorate --pretty=oneline --abbrev-commit --branches
   check = diff --staged
   add-check = !git add -A && git check
 
