@@ -29,6 +29,8 @@
   :mode
   ("\\.js\\'" . web-mode)
   ("\\.jsx\\'" . web-mode)
+  ("\\.ts\\'" . web-mode)
+  ("\\.tsx\\'" . web-mode)
   ("\\.hbs\\'" . web-mode)
   ("\\.html\\'" . web-mode)
   ("\\.html.eex\\'" . web-mode)
@@ -37,7 +39,9 @@
   (setq web-mode-attr-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'"))))
 
 (use-package magit)
 (use-package json-mode
@@ -61,6 +65,10 @@
   (setq enh-ruby-deep-indent-paren nil)
   (setq enh-ruby-add-encoding-comment-on-save nil))
 
+(use-package groovy-mode)
+(use-package typescript-mode
+  :init
+  (setq typescript-indent-level 2))
 (use-package elixir-mode)
 (use-package toml-mode)
 (use-package rust-mode)
@@ -147,10 +155,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(custom-enabled-themes (quote (wombat)))
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(package-selected-packages
    (quote
-    (rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git git-gutter enh-ruby-mode elixir-mode dockerfile-mode))))
+    (company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
