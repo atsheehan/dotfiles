@@ -20,6 +20,7 @@
   :init
   (setq scss-compile-at-save nil))
 
+(use-package graphql-mode)
 (use-package markdown-mode)
 (use-package dockerfile-mode)
 (use-package helm-ls-git
