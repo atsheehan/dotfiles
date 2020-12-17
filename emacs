@@ -146,6 +146,11 @@
 (global-git-commit-mode)
 (server-start)
 
+(setq org-refile-targets '(("~/org/projects.org" :maxlevel . 2)
+                           ("~/org/someday.org" :level . 1)
+                           ("~/org/tickler.org" :maxlevel . 2)
+                           ("~/org/agenda.org" :maxlevel . 2)))
+
 (when (eq system-type 'darwin)
   ;; default Latin font (e.g. Consolas)
   (set-face-attribute 'default nil :family "Monaco")
@@ -164,7 +169,15 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (wombat)))
+ '(org-agenda-files (quote ("~/org/projects.org" "~/org/tickler.org")))
+ '(org-capture-templates
+   (quote
+    (("t" "Add TODO to inbox" entry
+      (file+headline "~/org/inbox.org" "Inbox")
+      (file "~/org/tpl-inbox.txt")))))
  '(org-export-backends (quote (ascii html icalendar latex md)))
+ '(org-refile-allow-creating-parent-nodes (quote confirm))
+ '(org-refile-use-outline-path (quote file))
  '(package-selected-packages
    (quote
     (company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))))
