@@ -50,6 +50,9 @@
   (setq web-mode-content-types-alist
         '(("jsx" . "\\.js[x]?\\'"))))
 
+(setq exec-path (append exec-path '("/home/asheehan/bin")))
+(setq exec-path (append exec-path '("/home/asheehan/.rbenv/shims")))
+
 (use-package magit)
 (use-package json-mode
   :mode "\\.avsc\\'")
