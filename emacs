@@ -198,7 +198,8 @@
  '(org-refile-use-outline-path (quote file))
  '(package-selected-packages
    (quote
-    (company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))))
+    (company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode)))
+ '(safe-local-variable-values (quote ((whitespace-line-column . 80)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
