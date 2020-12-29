@@ -28,6 +28,7 @@
 
 (add-hook 'org-mode-hook 'org-indent-mode)
 (global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c C-l") 'org-insert-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
@@ -169,13 +170,27 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes (quote (wombat)))
+ '(org-agenda-custom-commands
+   (quote
+    (("n" "Agenda and all TODOs"
+      ((agenda "" nil)
+       (alltodo "" nil))
+      nil)
+     ("s" "Salsify TODOs" tags "SALSIFY/TODO" nil))))
  '(org-agenda-files (quote ("~/org/projects.org" "~/org/tickler.org")))
  '(org-capture-templates
    (quote
     (("t" "Add TODO to inbox" entry
       (file+headline "~/org/inbox.org" "Inbox")
-      (file "~/org/tpl-inbox.txt")))))
+      (file "~/org/tpl-inbox.txt"))
+     ("j" "Journal entry" entry
+      (file+olp+datetree "~/org/journal.org")
+      (file "~/org/tpl-journal.txt"))
+     ("g" "Game journal entry" entry
+      (file+olp+datetree "~/org/game-dev-journal.org")
+      (file "~/org/tpl-journal.txt")))))
  '(org-export-backends (quote (ascii html icalendar latex md)))
+ '(org-indent-mode-turns-on-hiding-stars nil)
  '(org-refile-allow-creating-parent-nodes (quote confirm))
  '(org-refile-use-outline-path (quote file))
  '(package-selected-packages
