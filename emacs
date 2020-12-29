@@ -85,19 +85,19 @@
 (use-package glsl-mode)
 
 (use-package company)
-(use-package racer
-  :requires rust-mode
+;; (use-package racer
+;;   :requires rust-mode
 
-  :init
-  (require 'subr-x)
-  (setq racer-rust-src-path
-        (concat (string-trim (shell-command-to-string "rustc --print sysroot"))
-                "/lib/rustlib/src/rust/src"))
-  :config
-  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode))
+;;   :init
+;;   (require 'subr-x)
+;;   (setq racer-rust-src-path
+;;         (concat (string-trim (shell-command-to-string "rustc --print sysroot"))
+;;                 "/lib/rustlib/src/rust/src"))
+;;   :config
+;;   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+;;   (add-hook 'rust-mode-hook #'racer-mode)
+;;   (add-hook 'racer-mode-hook #'eldoc-mode)
+;;   (add-hook 'racer-mode-hook #'company-mode))
 
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
