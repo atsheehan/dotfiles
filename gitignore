@@ -5,6 +5,9 @@
 
 *.graffle
 
+/TODO
 /TODO.org
 
 .byebug_history
+
+node_modules

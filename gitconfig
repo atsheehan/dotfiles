@@ -27,3 +27,5 @@
 
 [push]
   default = matching
+[pull]
+	ff = only
