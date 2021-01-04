@@ -153,6 +153,7 @@
 (setq org-refile-targets '(("~/org/projects.org" :maxlevel . 2)
                            ("~/org/someday.org" :level . 1)
                            ("~/org/tickler.org" :maxlevel . 2)
+                           ("~/org/books.org" :maxlevel . 1)
                            ("~/org/agenda.org" :maxlevel . 2)))
 
 (when (eq system-type 'darwin)
@@ -191,7 +192,10 @@
       (file "~/org/tpl-journal.txt"))
      ("g" "Game journal entry" entry
       (file+olp+datetree "~/org/game-dev-journal.org")
-      (file "~/org/tpl-journal.txt")))))
+      (file "~/org/tpl-journal.txt"))
+     ("b" "Book recommendation" entry
+      (file+headline "~/org/books.org" "Books to read")
+      (file "~/org/tpl-book.txt")))))
  '(org-export-backends (quote (ascii html icalendar latex md)))
  '(org-indent-mode-turns-on-hiding-stars nil)
  '(org-refile-allow-creating-parent-nodes (quote confirm))
