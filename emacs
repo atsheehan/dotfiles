@@ -26,7 +26,6 @@
 (use-package helm-ls-git
   :bind ("C-x C-d" . 'helm-browse-project))
 
-(add-hook 'org-mode-hook 'org-indent-mode)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c C-l") 'org-insert-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
