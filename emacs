@@ -84,19 +84,19 @@
 (use-package glsl-mode)
 
 (use-package company)
-;; (use-package racer
-;;   :requires rust-mode
+(use-package racer
+  :requires rust-mode
 
-;;   :init
-;;   (require 'subr-x)
-;;   (setq racer-rust-src-path
-;;         (concat (string-trim (shell-command-to-string "rustc --print sysroot"))
-;;                 "/lib/rustlib/src/rust/src"))
-;;   :config
-;;   (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-;;   (add-hook 'rust-mode-hook #'racer-mode)
-;;   (add-hook 'racer-mode-hook #'eldoc-mode)
-;;   (add-hook 'racer-mode-hook #'company-mode))
+  :init
+  (require 'subr-x)
+  (setq racer-rust-src-path
+        (concat (string-trim (shell-command-to-string "rustc --print sysroot"))
+                "/lib/rustlib/src/rust/library"))
+  :config
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
 
 ;; Remove unused toolbars to gain more screen real estate
 (scroll-bar-mode 0)
@@ -201,7 +201,7 @@
  '(org-refile-use-outline-path (quote file))
  '(package-selected-packages
    (quote
-    (company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode)))
+    (graphviz-dot-mode racer company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode)))
  '(safe-local-variable-values (quote ((whitespace-line-column . 80)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
