@@ -168,18 +168,17 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(custom-enabled-themes (quote (wombat)))
+ '(custom-enabled-themes '(wombat))
  '(org-agenda-custom-commands
-   (quote
-    (("n" "Agenda and all TODOs"
+   '(("n" "Agenda and all TODOs"
       ((agenda "" nil)
        (alltodo "" nil))
       nil)
-     ("s" "Salsify TODOs" tags "SALSIFY/TODO" nil))))
- '(org-agenda-files (quote ("~/org/projects.org" "~/org/tickler.org")))
+     ("s" "Salsify TODOs" tags "SALSIFY/TODO" nil)))
+ '(org-agenda-files
+   '("~/org/projects.org" "~/org/tickler.org" "~/org/agenda.org"))
  '(org-capture-templates
-   (quote
-    (("t" "Add TODO to inbox" entry
+   '(("t" "Add TODO to inbox" entry
       (file+headline "~/org/inbox.org" "Inbox")
       (file "~/org/tpl-inbox.txt"))
      ("j" "Journal entry" entry
@@ -190,15 +189,15 @@
       (file "~/org/tpl-journal.txt"))
      ("b" "Book recommendation" entry
       (file+headline "~/org/books.org" "Books to read")
-      (file "~/org/tpl-book.txt")))))
- '(org-export-backends (quote (ascii html icalendar latex md)))
+      (file "~/org/tpl-book.txt"))))
+ '(org-export-backends '(ascii html icalendar latex md))
  '(org-indent-mode-turns-on-hiding-stars nil)
- '(org-refile-allow-creating-parent-nodes (quote confirm))
- '(org-refile-use-outline-path (quote file))
+ '(org-log-into-drawer t)
+ '(org-refile-allow-creating-parent-nodes 'confirm)
+ '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   (quote
-    (graphviz-dot-mode racer company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode)))
- '(safe-local-variable-values (quote ((whitespace-line-column . 80)))))
+   '(company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
+ '(safe-local-variable-values '((whitespace-line-column . 80))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
