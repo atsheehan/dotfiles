@@ -127,6 +127,10 @@
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
+(use-package lsp-java
+  :ensure t
+  :config (add-hook 'java-mode-hook 'lsp))
+
 (setq org-log-done t)
 
 (setq ring-bell-function 'ignore)
@@ -196,7 +200,7 @@
  '(org-refile-allow-creating-parent-nodes 'confirm)
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
+   '(treemacs lsp-java company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
  '(safe-local-variable-values '((whitespace-line-column . 80))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
