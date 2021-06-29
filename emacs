@@ -67,6 +67,7 @@
 (use-package magit)
 (use-package json-mode
   :mode "\\.avsc\\'")
+(use-package jsonnet-mode)
 
 ;; Display which lines have been modified since last commit. The
 ;; fringe package works with line numbers.
