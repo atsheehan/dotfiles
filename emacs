@@ -20,7 +20,10 @@
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp))
+  :hook ((c-mode . lsp))
   :commands lsp)
 ;; Taken from https://emacs-lsp.github.io/lsp-mode/page/performance/
 (setq gc-cons-threshold 100000000)
