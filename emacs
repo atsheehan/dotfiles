@@ -134,8 +134,6 @@
   :ensure t
   :config (add-hook 'java-mode-hook 'lsp))
 
-(setq org-log-done t)
-
 (setq ring-bell-function 'ignore)
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -152,11 +150,10 @@
 (global-git-commit-mode)
 (server-start)
 
-(setq org-refile-targets '(("~/org/projects.org" :maxlevel . 2)
-                           ("~/org/someday.org" :level . 1)
-                           ("~/org/tickler.org" :maxlevel . 2)
-                           ("~/org/books.org" :maxlevel . 1)
-                           ("~/org/agenda.org" :maxlevel . 2)))
+(setq org-refile-targets '(("~/org/salsify.org" :maxlevel . 2)
+                           ("~/org/personal.org" :level . 1)
+                           ("~/org/scheduled.org" :maxlevel . 2)
+                           ("~/org/books.org" :maxlevel . 1)))
 
 (when (eq system-type 'darwin)
   ;; default Latin font (e.g. Consolas)
@@ -180,23 +177,13 @@
    '(("n" "Agenda and all TODOs"
       ((agenda "" nil)
        (alltodo "" nil))
-      nil)
-     ("s" "Salsify TODOs" tags "SALSIFY/TODO" nil)))
- '(org-agenda-files
-   '("~/org/projects.org" "~/org/tickler.org" "~/org/agenda.org"))
+      nil)))
+ '(org-agenda-files '("~/org/scheduled.org"
+                      "~/org/salsify.org"))
  '(org-capture-templates
    '(("t" "Add TODO to inbox" entry
       (file+headline "~/org/inbox.org" "Inbox")
-      (file "~/org/tpl-inbox.txt"))
-     ("j" "Journal entry" entry
-      (file+olp+datetree "~/org/journal.org")
-      (file "~/org/tpl-journal.txt"))
-     ("g" "Game journal entry" entry
-      (file+olp+datetree "~/org/game-dev-journal.org")
-      (file "~/org/tpl-journal.txt"))
-     ("b" "Book recommendation" entry
-      (file+headline "~/org/books.org" "Books to read")
-      (file "~/org/tpl-book.txt"))))
+      (file "~/org/tpl-inbox.txt"))))
  '(org-export-backends '(ascii html icalendar latex md))
  '(org-indent-mode-turns-on-hiding-stars nil)
  '(org-log-into-drawer t)
