@@ -67,7 +67,9 @@
 (push (concat (file-name-as-directory (getenv "HOME")) ".rbenv/shims") exec-path)
 (push (concat (file-name-as-directory (getenv "HOME")) "bin") exec-path)
 
-(use-package magit)
+(use-package magit
+  :init
+  (setq git-commit-fill-column 72))
 (use-package json-mode
   :mode "\\.avsc\\'")
 (use-package jsonnet-mode)
@@ -133,6 +135,9 @@
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
+;; Increase line wrapping to 100 characters
+(setq-default fill-column 100)
 
 (use-package lsp-java
   :ensure t
