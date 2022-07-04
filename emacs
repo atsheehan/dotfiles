@@ -34,6 +34,7 @@
   :init
   (setq scss-compile-at-save nil))
 
+(use-package rustic)
 (use-package graphql-mode)
 (use-package markdown-mode)
 (use-package dockerfile-mode)
@@ -187,8 +188,7 @@
       ((agenda "" nil)
        (alltodo "" nil))
       nil)))
- '(org-agenda-files '("~/org/scheduled.org"
-                      "~/org/salsify.org"))
+ '(org-agenda-files '("~/org/scheduled.org" "~/org/salsify.org"))
  '(org-capture-templates
    '(("t" "Add TODO to inbox" entry
       (file+headline "~/org/inbox.org" "Inbox")
@@ -199,7 +199,7 @@
  '(org-refile-allow-creating-parent-nodes 'confirm)
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(treemacs lsp-java company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
+   '(rustic lua-mode treemacs lsp-java company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
  '(safe-local-variable-values '((whitespace-line-column . 80))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
