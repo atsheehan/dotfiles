@@ -39,6 +39,7 @@
   :init
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
+(use-package foreman-mode)
 (use-package graphql-mode)
 (use-package markdown-mode)
 (use-package dockerfile-mode)
@@ -49,6 +50,7 @@
 (global-set-key (kbd "C-c C-l") 'org-insert-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c C-f") 'foreman-start)
 
 (use-package web-mode
   :mode
