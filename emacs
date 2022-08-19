@@ -189,6 +189,8 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(custom-enabled-themes '(wombat))
+ '(lsp-rust-analyzer-cargo-watch-command "test")
+ '(lsp-rust-analyzer-cargo-watch-enable t)
  '(org-agenda-custom-commands
    '(("n" "Agenda and all TODOs"
       ((agenda "" nil)
