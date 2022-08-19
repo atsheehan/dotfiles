@@ -35,6 +35,10 @@
   (setq scss-compile-at-save nil))
 
 (use-package rustic)
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 (use-package graphql-mode)
 (use-package markdown-mode)
 (use-package dockerfile-mode)
