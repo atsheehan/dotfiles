@@ -40,6 +40,9 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 (use-package foreman-mode)
+(use-package rg
+  :init
+  (rg-enable-default-bindings))
 (use-package graphql-mode)
 (use-package markdown-mode)
 (use-package dockerfile-mode)
