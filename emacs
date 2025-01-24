@@ -86,9 +86,9 @@
 
 ;; Display which lines have been modified since last commit. The
 ;; fringe package works with line numbers.
-(use-package git-gutter-fringe+
+(use-package git-gutter-fringe
   :config
-  (global-git-gutter+-mode 1))
+  (global-git-gutter-mode 1))
 
 (use-package enh-ruby-mode
   :mode
