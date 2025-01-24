@@ -119,7 +119,7 @@
 (menu-bar-mode 0)
 
 ;; Global line numbers mode
-(global-linum-mode 1)
+(global-display-line-numbers-mode 1)
 
 ;; Hide splash screen and banner
 (setq inhibit-startup-message t
