@@ -10,10 +10,15 @@
 (if (not (package-installed-p 'use-package))
     (package-install 'use-package))
 
-(setq use-package-verbose t)
-(setq use-package-always-ensure t)
-
 (require 'use-package)
+
+(use-package tree-sitter)
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package flycheck
   :ensure t
@@ -89,18 +94,6 @@
 (use-package git-gutter-fringe
   :config
   (global-git-gutter-mode 1))
-
-(use-package enh-ruby-mode
-  :mode
-  ("Gemfile" . enh-ruby-mode)
-  ("Cheffile" . enh-ruby-mode)
-  ("Rakefile" . enh-ruby-mode)
-  ("\\.rb\\'" . enh-ruby-mode)
-  ("\\.gemspec\\'" . enh-ruby-mode)
-  ("\\.rake\\'" . enh-ruby-mode)
-  :init
-  (setq enh-ruby-deep-indent-paren nil)
-  (setq enh-ruby-add-encoding-comment-on-save nil))
 
 (use-package groovy-mode)
 (use-package typescript-mode
@@ -210,7 +203,7 @@
  '(org-refile-allow-creating-parent-nodes 'confirm)
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(rustic lua-mode treemacs lsp-java company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
+   '(tree-sitter-langs treesit-auto tree-sitter rustic lua-mode treemacs lsp-java company robe robe-mode glsl-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
  '(safe-local-variable-values '((whitespace-line-column . 80))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
