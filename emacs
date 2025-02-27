@@ -84,8 +84,7 @@
 (push (concat (file-name-as-directory (getenv "HOME")) "bin") exec-path)
 
 (use-package magit
-  :init
-  (setq git-commit-fill-column 72))
+  :hook (git-commit-mode . (lambda () (setq fill-column 72))))
 (use-package json-mode
   :mode "\\.avsc\\'")
 (use-package jsonnet-mode)
