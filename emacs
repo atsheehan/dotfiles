@@ -157,9 +157,7 @@
   (ansi-color-apply-on-region (point-min) (point-max)))
 
 (setq create-lockfiles nil)
-(setq ruby-insert-encoding-magic-comment nil)
 
-(global-git-commit-mode)
 (server-start)
 
 (setq org-refile-targets '(("~/org/salsify.org" :maxlevel . 2)
