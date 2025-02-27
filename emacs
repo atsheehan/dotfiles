@@ -11,6 +11,8 @@
     (package-install 'use-package))
 
 (require 'use-package)
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 (use-package tree-sitter)
 (use-package treesit-auto
@@ -21,7 +23,6 @@
   (global-treesit-auto-mode))
 
 (use-package flycheck
-  :ensure t
   :init (global-flycheck-mode))
 
 (use-package lsp-mode
@@ -143,7 +144,6 @@
 (setq-default fill-column 100)
 
 (use-package lsp-java
-  :ensure t
   :config (add-hook 'java-mode-hook 'lsp))
 
 (setq ring-bell-function 'ignore)
