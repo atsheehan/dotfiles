@@ -19,29 +19,69 @@
   :custom
   (treesit-auto-install 'prompt))
 
+(when (and (fboundp 'treesit-available-p)
+           (treesit-available-p)
+           (not (treesit-language-available-p 'typescript)))
+  (treesit-install-language-grammar 'typescript))
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+
 (use-package go-mode)
+
+(use-package string-inflection)
+
+
+(defun rename-camel-to-snake ()
+  "Rename the identifier at the current point from camelCase to snake_case"
+  (interactive)
+
+  ;; Check if LSP is active
+  (unless (lsp-workspaces)
+    (error "LSP is not active in this buffer"))
+
+  ;; Check if string-inflection is available
+  (unless (fboundp 'string-inflection-underscore)
+    (error "string-inflection package is required but not available"))
+
+  (let* ((bounds (bounds-of-thing-at-point 'symbol))
+         (start (car bounds))
+         (end (cdr bounds)))
+
+    (if (and start end)
+        (let* ((identifier-name (buffer-substring-no-properties start end))
+               (new-name (string-inflection-underscore identifier-name)))
+          (if (string= identifier-name new-name)
+              (message "Identifier '%s' is already in snake_case" identifier-name)
+            (progn
+              (message "Renaming %s to %s" identifier-name new-name)
+              ;; Move to the symbol before calling lsp-rename
+              (goto-char start)
+              (lsp-rename new-name))))
+      (error "No symbol found at point"))))
 
 (use-package terraform-mode)
 
 (use-package flycheck
   :init (global-flycheck-mode))
 
+(use-package glsl-mode)
+
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp))
   :hook ((c-mode . lsp))
+  :hook ((objc-mode . lsp))
   :hook ((go-mode . lsp))
-  :hook ((typescript-mode . lsp))
+  :hook ((tsx-ts-mode . lsp))
+  :hook ((typescript-ts-mode . lsp))
   :commands lsp)
 ;; Taken from https://emacs-lsp.github.io/lsp-mode/page/performance/
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024))
 
 (use-package yaml-mode)
-(use-package scss-mode
-  :init
-  (setq scss-compile-at-save nil))
 
 (use-package exec-path-from-shell
   :init
@@ -74,13 +114,19 @@
   ("\\.html\\'" . web-mode)
   ("\\.html.eex\\'" . web-mode)
   ("\\.html.erb\\'" . web-mode)
-  :init
-  (setq web-mode-attr-indent-offset 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
+  ("\\.css\\'" . web-mode)
+  ("\\.scss\\'" . web-mode)
+  ("\\.sass\\'" . web-mode)
+  :config
+  (setq web-mode-attr-indent-offset 2
+        web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2)
   (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'"))))
+        '(("jsx" . "\\.js[x]?\\'")
+          ("css" . "\\.scss\\'")
+          ("css" . "\\.sass\\'")
+          ("css" . "\\.css\\'"))))
 
 (push (concat (file-name-as-directory (getenv "HOME")) ".cargo/bin") exec-path)
 (push (concat (file-name-as-directory (getenv "HOME")) "go/bin") exec-path)
@@ -100,9 +146,6 @@
   (global-git-gutter-mode 1))
 
 (use-package groovy-mode)
-(use-package typescript-mode
-  :init
-  (setq typescript-indent-level 2))
 (use-package elixir-mode)
 (use-package toml-mode)
 (use-package rust-mode)
@@ -135,6 +178,7 @@
 (global-set-key (kbd "C-c p") 'fill-paragraph)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f5>") 'replace-string)
+(global-set-key (kbd "<f6>") 'sort-lines)
 
 (defun align-equals-region (start end)
   "Align equals signs in the current region."
@@ -173,6 +217,23 @@
                            ("~/org/scheduled.org" :maxlevel . 2)
                            ("~/org/books.org" :maxlevel . 1)))
 
+;; Install ps2pdf package or use this custom function
+(defun buffer-to-pdf ()
+  (interactive)
+  (let* ((ps-file (concat (buffer-name) ".ps"))
+         (pdf-file (concat (buffer-name) ".pdf")))
+    (ps-print-buffer-with-faces ps-file)
+    (shell-command (format "ps2pdf %s %s" ps-file pdf-file))
+    (delete-file ps-file)
+    (shell-command (format "open %s" pdf-file))))
+
+(defun copy-buffer-filepath ()
+  (interactive)
+  (kill-new (buffer-file-name)))
+
+(global-set-key (kbd "<f7>") 'copy-buffer-filepath)
+(global-set-key (kbd "<f8>") 'json-pretty-print)
+
 (when (eq system-type 'darwin)
   ;; default Latin font (e.g. Consolas)
   (set-face-attribute 'default nil :family "Monaco")
@@ -207,7 +268,7 @@
  '(org-refile-allow-creating-parent-nodes 'confirm)
  '(org-refile-use-outline-path 'file)
  '(package-selected-packages
-   '(terraform-mode handlebars-mode go-mode flycheck-rust tree-sitter-langs treesit-auto tree-sitter lua-mode treemacs lsp-java company robe robe-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode typescript-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package scss-mode markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
+   '(string-inflection glsl-mode edit-indirect terraform-mode handlebars-mode go-mode flycheck-rust tree-sitter-langs treesit-auto tree-sitter lua-mode treemacs lsp-java company robe robe-mode git-gutter-fringe+ rbenv lsp-mode sql-presto jsonnet-mode graphql-mode org-ref csv-mode groovy-mode rust-mode toml-mode yaml-mode web-mode use-package markdown-mode magit json-mode helm-ls-git enh-ruby-mode elixir-mode dockerfile-mode))
  '(safe-local-variable-values '((whitespace-line-column . 80))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

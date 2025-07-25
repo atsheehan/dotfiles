@@ -3,11 +3,8 @@
 \#*
 .\#*
 
-*.graffle
-
-/TODO
-/TODO.org
-
 .byebug_history
 
 node_modules
+
+.claude/settings.local.json
