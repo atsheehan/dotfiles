@@ -1,7 +1,17 @@
+;;; init.el --- My Emacs configuration -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; My Emacs configuration.
+
+;;; Code:
+
 ;; Passing -1 will disable the toolbars along the top of the screen.
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+
+;; Always use spaces instead of tabs
+(indent-tabs-mode -1)
 
 ;; Dark color theme
 (load-theme 'wombat t)
@@ -23,7 +33,7 @@
   :ensure t
   :defer t
   :config
-  (define-key markdown-mode-map (kbd "C-c C-e") #'markdown-do)
+  (define-key markdown-mode-map (kbd "C-c C-e") 'markdown-do)
   :mode ("README\\.md\\'" . gfm-mode))
 
 (use-package magit
@@ -42,17 +52,35 @@
   :defer t
   :hook (rust-mode . lsp))
 
-(setq treesit-language-source-alist
+;; Displays error details on the sideline
+(use-package lsp-ui
+  :ensure t)
+
+;; Completion dialogs in buffers
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-company-mode))
+
+;; Provides inline syntax-checking
+(use-package flycheck
+  :ensure t
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+;; This variable will be used by the treesitter library when it's loaded
+(defvar treesit-language-source-alist nil)
+(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+  (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c")
         (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
 	(json "https://github.com/tree-sitter/tree-sitter-json")
         (rust "https://github.com/tree-sitter/tree-sitter-rust")
         (toml "https://github.com/tree-sitter/tree-sitter-toml")
         (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-(dolist (lang treesit-language-source-alist)
-  (unless (treesit-language-available-p (car lang))
-    (treesit-install-language-grammar (car lang))))
+  (dolist (lang treesit-language-source-alist)
+    (unless (treesit-language-available-p (car lang))
+      (treesit-install-language-grammar (car lang)))))
 
 ;; When attempting to use c-mode, use c-ts-mode instead
 (setq major-mode-remap-alist
@@ -63,3 +91,6 @@
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-ts-mode))
+
+(provide 'init)
+;;; init.el ends here
