@@ -97,6 +97,12 @@
   ;; rather than lazy loading with :config
   (vertico-mode))
 
+;; Highlight uncommitted changes in the fringe
+(use-package diff-hl
+  :ensure t
+  :config
+  (global-diff-hl-mode))
+
 ;; This variable will be used by the treesitter library when it's loaded
 (defvar treesit-language-source-alist nil)
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
