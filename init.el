@@ -29,6 +29,16 @@
 ;; Set the PATH for running external processes
 (add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
 
+;; Set the line break to 100 chars (default is 70)
+(setq fill-column 100)
+
+;; Ensure correct amount of whitespace
+(add-hook 'before-save-hook #'delete-trailing-whitespace)
+(setq require-final-newline t)
+
+;; Don't ring the terminal bell on any errors, it's super annoying
+(setq ring-bell-function 'ignore)
+
 (use-package markdown-mode
   :ensure t
   :defer t
