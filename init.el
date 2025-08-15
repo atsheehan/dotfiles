@@ -42,8 +42,8 @@
 (use-package markdown-mode
   :ensure t
   :defer t
-  :config
-  (define-key markdown-mode-map (kbd "C-c C-e") 'markdown-do)
+  :bind (:map markdown-mode-map
+	      ("C-c C-e" . markdown-do))
   :mode ("README\\.md\\'" . gfm-mode))
 
 (use-package magit
