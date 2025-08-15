@@ -90,6 +90,13 @@
   :config
   (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package vertico
+  :ensure t
+  :init
+  ;; Calling vertico in init will force the initialization on startup,
+  ;; rather than lazy loading with :config
+  (vertico-mode))
+
 ;; This variable will be used by the treesitter library when it's loaded
 (defvar treesit-language-source-alist nil)
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
