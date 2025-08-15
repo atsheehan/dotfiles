@@ -60,11 +60,23 @@
 (use-package lsp-mode
   :ensure t
   :defer t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :hook (rust-mode . lsp))
+
+;; Temporary fix to disable a warning with rust-analyzer until the following is released in the next lsp version
+;; https://github.com/emacs-lsp/lsp-mode/commit/dc75f2ad9fb7e516be30585653fd40452e752441
+(defvar lsp-rust-analyzer-cargo-extra-env nil)
+(with-eval-after-load 'lsp-rust
+  (setq lsp-rust-analyzer-cargo-extra-env #s(hash-table)))
 
 ;; Displays error details on the sideline
 (use-package lsp-ui
-  :ensure t)
+  :ensure t
+  :bind (:map lsp-ui-mode-map
+	      ([remap xref-find-definitions] . lsp-ui-peek-find-definitions)
+	      ([remap xref-find-references] . lsp-ui-peek-find-references)
+	      ("C-c d" . lsp-ui-doc-toggle)))
 
 ;; Completion dialogs in buffers
 (use-package company
