@@ -26,9 +26,6 @@
 ;; Place to drop manually installed packages
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
-;; Set the PATH for running external processes
-(add-to-list 'exec-path (expand-file-name "~/.cargo/bin"))
-
 ;; Set the line break to 100 chars (default is 70)
 (setq fill-column 100)
 
@@ -38,6 +35,13 @@
 
 ;; Don't ring the terminal bell on any errors, it's super annoying
 (setq ring-bell-function 'ignore)
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  ;; Even though we're using Wayland, window-system still exports 'x on Linux
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (use-package markdown-mode
   :ensure t
