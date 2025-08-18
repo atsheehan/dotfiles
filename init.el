@@ -209,6 +209,9 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 )
 
+;; Keybindings
+(global-set-key (kbd "C-c C-,") 'comment-region)
+
 ;; This variable will be used by the treesitter library when it's loaded
 (defvar treesit-language-source-alist nil)
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
