@@ -213,16 +213,30 @@
 ;; Keybindings
 (global-set-key (kbd "C-c C-,") 'comment-region)
 
-;; This variable will be used by the treesitter library when it's loaded
+;; On macOS my Emacs treesitter library has ABI version 14, but on Linux it's 15. I need to use different grammar versions for each.
 (defvar treesit-language-source-alist nil)
-(when (and (fboundp 'treesit-available-p) (treesit-available-p))
+(let ((abi-version (treesit-library-abi-version)))
   (setq treesit-language-source-alist
-      '((c "https://github.com/tree-sitter/tree-sitter-c")
-        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
-	(json "https://github.com/tree-sitter/tree-sitter-json")
-        (rust "https://github.com/tree-sitter/tree-sitter-rust")
-        (toml "https://github.com/tree-sitter/tree-sitter-toml")
-        (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+        (cond
+         ;; ABI version 14 (tree-sitter 0.20.x)
+         ((= abi-version 14)
+	  '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.6")
+            (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+	    (json "https://github.com/tree-sitter/tree-sitter-json")
+            (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3")
+            (toml "https://github.com/tree-sitter/tree-sitter-toml")
+            (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+         ;; Default to latest for unknown versions
+         (t
+	  '((c "https://github.com/tree-sitter/tree-sitter-c")
+            (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+	    (json "https://github.com/tree-sitter/tree-sitter-json")
+            (rust "https://github.com/tree-sitter/tree-sitter-rust")
+            (toml "https://github.com/tree-sitter/tree-sitter-toml")
+            (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))))
+
+(when (and (fboundp 'treesit-available-p) (treesit-available-p))
   (dolist (lang treesit-language-source-alist)
     (unless (treesit-language-available-p (car lang))
       (treesit-install-language-grammar (car lang)))))
