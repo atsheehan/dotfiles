@@ -67,10 +67,21 @@
 
 (use-package lsp-mode
   :ensure t
-  :defer t
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook (rust-mode . lsp))
+  :hook ((rust-mode . lsp)
+	 (ruby-ts-mode . lsp))
+  :commands (lsp lsp-deferred)
+  :config
+  ;; Add ruby-lsp as the Ruby language server
+  (when (fboundp 'lsp-register-client)
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection '("ruby-lsp"))
+      :major-modes '(ruby-mode ruby-ts-mode)
+      :server-id 'ruby-lsp))
+
+    (setq lsp-ruby-lsp-use-bundler t)))
 
 ;; Temporary fix to disable a warning with rust-analyzer until the following is released in the next lsp version
 ;; https://github.com/emacs-lsp/lsp-mode/commit/dc75f2ad9fb7e516be30585653fd40452e752441
@@ -226,6 +237,7 @@
 	  '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.23.6")
             (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
 	    (json "https://github.com/tree-sitter/tree-sitter-json")
+            (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
             (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3")
             (toml "https://github.com/tree-sitter/tree-sitter-toml")
             (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
@@ -235,6 +247,7 @@
 	  '((c "https://github.com/tree-sitter/tree-sitter-c")
             (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
 	    (json "https://github.com/tree-sitter/tree-sitter-json")
+            (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
             (rust "https://github.com/tree-sitter/tree-sitter-rust")
             (toml "https://github.com/tree-sitter/tree-sitter-toml")
             (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))))
@@ -247,7 +260,8 @@
 ;; When attempting to use c-mode, use c-ts-mode instead
 (setq major-mode-remap-alist
       '((c-mode . c-ts-mode)
-	(cpp-mode . cpp-ts-mode)))
+	(cpp-mode . cpp-ts-mode)
+	(ruby-mode . ruby-ts-mode)))
 
 ;; These languages don't have a built-in mode to replace, so just associate the extension with the new tree-sitter mode.
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
