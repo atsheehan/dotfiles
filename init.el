@@ -20,6 +20,7 @@
 (setq make-backup-files nil)
 
 ;; MELPA contains lsp-mode that isn't in ELPA
+(require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
