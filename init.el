@@ -5,6 +5,9 @@
 
 ;;; Code:
 
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :family "Menlo" :height 160))
+
 ;; Passing -1 will disable the toolbars along the top of the screen.
 (menu-bar-mode -1)
 (tool-bar-mode -1)
