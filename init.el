@@ -31,7 +31,10 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 ;; Set the line break to 100 chars (default is 70)
-(setq fill-column 100)
+(setq-default fill-column 100)
+
+;; Show the column number
+(column-number-mode 1)
 
 ;; Ensure correct amount of whitespace
 (add-hook 'before-save-hook #'delete-trailing-whitespace)
@@ -54,6 +57,9 @@
 	      ("C-c C-e" . markdown-do))
   :mode ("README\\.md\\'" . gfm-mode))
 
+(use-package jsonnet-mode
+  :ensure t)
+
 (use-package magit
   :ensure t
   :hook
@@ -74,14 +80,12 @@
   :commands (lsp lsp-deferred)
   :config
   ;; Add ruby-lsp as the Ruby language server
-  (when (fboundp 'lsp-register-client)
-    (lsp-register-client
-     (make-lsp-client
-      :new-connection (lsp-stdio-connection '("ruby-lsp"))
-      :major-modes '(ruby-mode ruby-ts-mode)
-      :server-id 'ruby-lsp))
-
-    (setq lsp-ruby-lsp-use-bundler t)))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("ruby-lsp"))
+    :major-modes '(ruby-mode ruby-ts-mode)
+    :server-id 'ruby-lsp))
+  (setq lsp-ruby-lsp-use-bundler t))
 
 ;; Temporary fix to disable a warning with rust-analyzer until the following is released in the next lsp version
 ;; https://github.com/emacs-lsp/lsp-mode/commit/dc75f2ad9fb7e516be30585653fd40452e752441
@@ -156,7 +160,7 @@
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ;; M-s bindings in `search-map'
-         ("M-s d" . consult-find)                  ;; Alternative: consult-fd
+         ("M-s d" . consult-fd)                    ;; Alternative: consult-fd
          ("M-s c" . consult-locate)
          ("M-s g" . consult-grep)
          ("M-s G" . consult-git-grep)
