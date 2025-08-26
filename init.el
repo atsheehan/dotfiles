@@ -76,7 +76,9 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp)
-	 (ruby-ts-mode . lsp))
+	 (ruby-ts-mode . lsp)
+         (typescript-ts-mode . lsp)
+         (tsx-ts-mode . lsp))
   :commands (lsp lsp-deferred)
   :config
   ;; Add ruby-lsp as the Ruby language server
@@ -244,6 +246,8 @@
             (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
             (rust "https://github.com/tree-sitter/tree-sitter-rust" "v0.23.3")
             (toml "https://github.com/tree-sitter/tree-sitter-toml")
+	    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+	    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
             (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
          ;; Default to latest for unknown versions
@@ -254,6 +258,8 @@
             (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
             (rust "https://github.com/tree-sitter/tree-sitter-rust")
             (toml "https://github.com/tree-sitter/tree-sitter-toml")
+	    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+	    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
             (yaml "https://github.com/ikatyang/tree-sitter-yaml"))))))
 
 (when (and (fboundp 'treesit-available-p) (treesit-available-p))
@@ -271,6 +277,7 @@
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
 
 (provide 'init)
 ;;; init.el ends here
